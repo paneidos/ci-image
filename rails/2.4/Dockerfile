@@ -12,7 +12,7 @@ RUN apt-get update && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends curl openssh-client \
-    nodejs yarn && apt-get clean && \
+    nodejs yarn libpq-dev && apt-get clean && \
     useradd -m -d /home/ci -U -u 1000 ci
 
 USER ci
