@@ -13,7 +13,7 @@ RUN apt-get update && \
     echo "deb-src https://deb.nodesource.com/node_8.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends php7.2-bcmath php7.2-cli php7.2-curl php7.2-gd \
+    apt-get install -y --no-install-recommends php7.2-bcmath php7.2-cli php7.2-curl php7.2-gd php7.2-intl \
     php7.2-mysql php7.2-soap php7.2-xml php7.2-xsl php7.2-zip php7.2-mbstring php7.2-xdebug curl openssh-client \
     nodejs yarn mariadb-client build-essential && apt-get clean && \
     curl --silent --show-error https://getcomposer.org/installer | \
