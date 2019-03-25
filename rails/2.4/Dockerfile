@@ -17,4 +17,4 @@ RUN apt-get update && \
 
 USER ci
 
-RUN gem install bundler --no-rdoc --no-ri
+RUN gem install bundler --no-document
