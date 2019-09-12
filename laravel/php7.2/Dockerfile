@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y --no-install-recommends php7.2-bcmath php7.2-cli php7.2-curl php7.2-gd php7.2-intl \
     php7.2-mysql php7.2-soap php7.2-xml php7.2-xsl php7.2-zip php7.2-mbstring php7.2-xdebug curl openssh-client \
-    nodejs yarn mariadb-client build-essential zip unzip && apt-get clean && \
+    nodejs yarn mariadb-client build-essential zip unzip php-memcached && apt-get clean && \
     curl --silent --show-error https://getcomposer.org/installer | \
     php -- --install-dir=/usr/local/bin --filename=composer && \
     useradd -m -d /home/ci -U -u 1000 ci
