@@ -1,10 +1,10 @@
-FROM debian:jessie
+FROM debian:buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get -y --no-install-recommends install wget git apt-transport-https lsb-release ca-certificates locales && \
+    apt-get -y --no-install-recommends install wget git apt-transport-https lsb-release ca-certificates locales gnupg2 && \
     wget -O - https://packages.sury.org/php/apt.gpg | apt-key add - && \
     wget -O - https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     wget -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
