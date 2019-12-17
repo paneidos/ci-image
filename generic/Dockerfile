@@ -8,8 +8,8 @@ RUN apt-get update -y && \
     wget -O - https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     wget -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list && \
-    echo "deb https://deb.nodesource.com/node_6.x jessie main" >> /etc/apt/sources.list.d/nodesource.list && \
-    echo "deb-src https://deb.nodesource.com/node_6.x jessie main" >> /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb https://deb.nodesource.com/node_12.x jessie main" >> /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb-src https://deb.nodesource.com/node_12.x jessie main" >> /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update -y && \
     apt-get install -y yarn git acl default-jre-headless mariadb-client wget && \
