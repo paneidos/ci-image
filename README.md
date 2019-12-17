@@ -7,10 +7,10 @@ Useful for Ruby, PHP and Nodejs.
 Switch PHP versions with `switch-php VERSION`.
 
 # Laravel
-Comes with Laravel Envoy for deployment. Default is currently PHP 7.1.
+Comes with Laravel Envoy for deployment. Default is currently PHP 7.3.
 
 # MariaDB
-MariaDB 10.1 with Barracuda as default file format for InnoDB.
+MariaDB 10.2 with Barracuda as default file format for InnoDB.
 
 # License
 Code in this repo is licensed under the MIT license, software included in the docker images may have their own license.
