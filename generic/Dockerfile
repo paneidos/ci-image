@@ -1,4 +1,4 @@
-FROM ruby:2.3
+FROM ruby:2.6
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -14,12 +14,12 @@ RUN apt-get update -y && \
     apt-get update -y && \
     apt-get install -y yarn git acl default-jre-headless mariadb-client wget && \
     locale-gen nl_NL.UTF-8 nl_NL@euro && \
-    apt-get install -y php5.6-bcmath php5.6-cli php5.6-curl php5.6-dev php5.6-gd php5.6-json php5.6-mcrypt \
-        php5.6-mysql php5.6-readline php5.6-xml php5.6-xsl php5.6-zip php5.6-mbstring php5.6-xdebug && \
-    apt-get install -y php7.0-bcmath php7.0-cli php7.0-curl php7.0-dev php7.0-gd php7.0-mcrypt php7.0-mysql \
-    php7.0-xml php7.0-xsl php7.0-zip php7.0-mbstring php7.0-xdebug && \
-    apt-get install -y php7.1-bcmath php7.1-cli php7.1-curl php7.1-dev php7.1-gd php7.1-mcrypt php7.1-mysql \
-    php7.1-xml php7.1-xsl php7.1-zip php7.1-mbstring php7.1-xdebug && \
+    apt-get install -y --no-install-recommends php7.2-bcmath php7.2-cli php7.2-curl php7.2-gd php7.2-intl \
+    php7.2-mysql php7.2-soap php7.2-xml php7.2-xsl php7.2-zip php7.2-mbstring php7.2-xdebug && \
+    apt-get install -y --no-install-recommends php7.3-bcmath php7.3-cli php7.3-curl php7.3-gd php7.3-intl \
+    php7.3-mysql php7.3-soap php7.3-xml php7.3-xsl php7.3-zip php7.3-mbstring php7.3-xdebug && \
+    apt-get install -y --no-install-recommends php7.4-bcmath php7.4-cli php7.4-curl php7.4-gd php7.4-intl \
+    php7.4-mysql php7.4-soap php7.4-xml php7.4-xsl php7.4-zip php7.4-mbstring php7.4-xdebug && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD install-composer.sh /
