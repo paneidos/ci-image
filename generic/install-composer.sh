@@ -1,7 +1,8 @@
 #!/bin/sh -e
-echo "xdebug.max_nesting_level=\"256\"" >> /etc/php/5.6/mods-available/xdebug.ini
-echo "xdebug.max_nesting_level=\"256\"" >> /etc/php/7.0/mods-available/xdebug.ini
-echo "xdebug.max_nesting_level=\"256\"" >> /etc/php/7.1/mods-available/xdebug.ini
+for mod_dir in /etc/php/*/mods-available
+do
+    echo "xdebug.max_nesting_level=\"256\"" >> "${mod_dir}/xdebug.ini"
+done
 
 EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
