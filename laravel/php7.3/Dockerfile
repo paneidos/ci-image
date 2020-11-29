@@ -1,5 +1,8 @@
 FROM debian:buster
 
+ARG php=php7.3
+ARG node_version=14
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
@@ -9,17 +12,21 @@ RUN apt-get update && \
     wget -O - https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     wget -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list && \
-    echo "deb https://deb.nodesource.com/node_14.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
-    echo "deb-src https://deb.nodesource.com/node_14.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb https://deb.nodesource.com/node_${node_version}.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb-src https://deb.nodesource.com/node_${node_version}.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends php7.3-bcmath php7.3-cli php7.3-curl php7.3-gd php7.3-intl \
-    php7.3-mysql php7.3-soap php7.3-xml php7.3-xsl php7.3-zip php7.3-mbstring php7.3-xdebug curl openssh-client \
-    nodejs yarn mariadb-client build-essential zip unzip php-memcached && apt-get clean && \
+    printf "Package: php5.6-common php7.0-common php7.1-common php7.2-common php7.3-common php7.4-common php8.0-common\nPin: release *\nPin-Priority: -1\n" | \
+        sed "s/ ${php}-common//" > /etc/apt/preferences.d/no-other-php && \
+    apt-get install -y --no-install-recommends curl openssh-client zip unzip \
+    nodejs yarn mariadb-client build-essential \
+    ${php}-bcmath ${php}-cli ${php}-curl ${php}-gd ${php}-intl ${php}-mbstring \
+    ${php}-mysql ${php}-soap ${php}-xml ${php}-xsl ${php}-zip ${php}-xdebug \
+    ${php}-memcached && apt-get clean && \
     curl --silent --show-error https://getcomposer.org/installer | \
     php -- --install-dir=/usr/local/bin --filename=composer && \
     useradd -m -d /home/ci -U -u 1000 ci
 
 USER ci
 
-RUN composer global require "laravel/envoy=~1.0"
+RUN composer global require "laravel/envoy"
