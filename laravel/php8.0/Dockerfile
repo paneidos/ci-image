@@ -16,7 +16,7 @@ RUN apt-get update && \
     echo "deb-src https://deb.nodesource.com/node_${node_version}.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    printf "Package: php5.6-common php7.0-common php7.1-common php7.2-common php7.3-common php7.4-common php8.0-common\nPin: release *\nPin-Priority: -1\n" | \
+    printf "Package: php5.6-common php7.0-common php7.1-common php7.2-common php7.3-common php7.4-common php8.0-common php8.1-common\nPin: release *\nPin-Priority: -1\n" | \
         sed "s/ ${php}-common//" > /etc/apt/preferences.d/no-other-php && \
     apt-get install -y --no-install-recommends curl openssh-client zip unzip \
     nodejs yarn mariadb-client build-essential \

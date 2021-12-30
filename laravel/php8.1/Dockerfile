@@ -1,6 +1,6 @@
 FROM debian:buster
 
-ARG php=php7.3
+ARG php=php8.1
 ARG node_version=14
 
 ENV DEBIAN_FRONTEND=noninteractive
