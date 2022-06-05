@@ -14,6 +14,7 @@ RUN apt-get -y update && \
     echo "deb-src https://deb.nodesource.com/node_${node_version}.x $(lsb_release -sc) main" >> /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
+    apt-get -y update && \
     apt-get install -y --no-install-recommends curl openssh-client \
     nodejs yarn libpq-dev postgresql-client && apt-get clean && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
