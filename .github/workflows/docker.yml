@@ -13,9 +13,11 @@ jobs:
       matrix:
         include:
           - dockerfile: ./laravel/php8.1/Dockerfile
-            image: paneidos/debug:laravel-php8.1
+            image: paneidos/debug
+            tag: laravel-php8.1
           - dockerfile: ./rails/ruby3.1/Dockerfile
-            image: paneidos/debug:rails-ruby3.1
+            image: paneidos/debug
+            tag: rails-ruby3.1
     permissions:
       contents: read
       packages: write
@@ -35,11 +37,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ matrix.image }}
       -
         name: Build and push
         uses: docker/build-push-action@v4
@@ -48,5 +45,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           file: ${{ matrix.dockerfile }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ matrix.image }}:${{ matrix.tag }}
+
