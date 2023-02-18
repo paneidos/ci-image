@@ -14,10 +14,12 @@ jobs:
         include:
           - dockerfile: ./laravel/php8.1/Dockerfile
             image: paneidos/debug
-            tag: laravel-php8.1
+            tag: laravel-php8.2
+            build-args: php=8.2,node=18
           - dockerfile: ./rails/ruby3.1/Dockerfile
             image: paneidos/debug
             tag: rails-ruby3.1
+            build-args: ruby=3.2,node=18
     permissions:
       contents: read
       packages: write
