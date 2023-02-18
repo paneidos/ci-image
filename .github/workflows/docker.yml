@@ -48,4 +48,4 @@ jobs:
           push: true
           file: ${{ matrix.dockerfile }}
           tags: ${{ matrix.image }}:${{ matrix.tag }}
-
+          build-args: ${{ matrix.build-args }}
