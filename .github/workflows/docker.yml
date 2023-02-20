@@ -3,7 +3,9 @@ name: Build images
 on:
   push:
     branches:
-      - refactor/gh-actions
+      - main
+  schedule:
+    - cron: '30 5 1 * *'
 
 jobs:
   build-and-push-image:
