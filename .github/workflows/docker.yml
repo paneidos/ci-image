@@ -1,0 +1,91 @@
+name: Build images
+
+on:
+  push:
+    branches:
+      - refactor/gh-actions
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: ./laravel/Dockerfile
+            image: paneidos/ci-image
+            tag: laravel-php8.2
+            build-args: "php=8.2\nnode=18"
+          - dockerfile: ./laravel/Dockerfile
+            image: paneidos/ci-image
+            tag: laravel-php8.1
+            build-args: "php=8.1\nnode=18"
+          - dockerfile: ./laravel/Dockerfile
+            image: paneidos/ci-image
+            tag: laravel-php8.0
+            build-args: "php=8.0\nnode=18"
+          - dockerfile: ./laravel/Dockerfile
+            image: paneidos/ci-image
+            tag: laravel-php7.4
+            build-args: "php=7.4\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby2.6
+            build-args: "ruby=2.6\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby2.7
+            build-args: "ruby=2.7\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby3.0
+            build-args: "ruby=3.0\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby3.1
+            build-args: "ruby=3.1\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby3.2
+            build-args: "ruby=3.2\nnode=18"
+          - dockerfile: ./serverless/Dockerfile
+            image: paneidos/ci-image
+            tag: serverless-python3.8
+            build-args: "ruby=3.8\nnode=18"
+          - dockerfile: ./serverless/Dockerfile
+            image: paneidos/ci-image
+            tag: serverless-python3.9
+            build-args: "ruby=3.9\nnode=18"
+          - dockerfile: ./serverless/Dockerfile
+            image: paneidos/ci-image
+            tag: serverless-python3.10
+            build-args: "ruby=3.10\nnode=18"
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          file: ${{ matrix.dockerfile }}
+          tags: ${{ matrix.image }}:${{ matrix.tag }}
+          build-args: ${{ matrix.build-args }}
