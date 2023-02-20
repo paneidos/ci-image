@@ -53,31 +53,31 @@ jobs:
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
             tag: django-python3.8
-            build-args: "ruby=3.8\nnode=18"
+            build-args: "python=3.8\nnode=18"
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
             tag: django-python3.9
-            build-args: "ruby=3.9\nnode=18"
+            build-args: "python=3.9\nnode=18"
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
             tag: django-python3.10
-            build-args: "ruby=3.10\nnode=18"
+            build-args: "python=3.10\nnode=18"
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
             tag: django-python3.11
-            build-args: "ruby=3.11\nnode=18"
+            build-args: "python=3.11\nnode=18"
           - dockerfile: ./serverless/Dockerfile
             image: paneidos/ci-image
             tag: serverless-python3.8
-            build-args: "ruby=3.8\nnode=16"
+            build-args: "python=3.8\nnode=16"
           - dockerfile: ./serverless/Dockerfile
             image: paneidos/ci-image
             tag: serverless-python3.9
-            build-args: "ruby=3.9\nnode=16"
+            build-args: "python=3.9\nnode=16"
           - dockerfile: ./serverless/Dockerfile
             image: paneidos/ci-image
             tag: serverless-python3.10
-            build-args: "ruby=3.10\nnode=16"
+            build-args: "python=3.10\nnode=16"
     permissions:
       contents: read
       packages: write
