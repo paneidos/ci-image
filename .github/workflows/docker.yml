@@ -66,6 +66,10 @@ jobs:
             image: paneidos/ci-image
             tag: django-python3.11
             build-args: "python=3.11\nnode=18"
+          - dockerfile: ./django/Dockerfile
+            image: paneidos/ci-image
+            tag: django-python3.12
+            build-args: "python=3.12\nnode=20"
           - dockerfile: ./serverless/Dockerfile
             image: paneidos/ci-image
             tag: serverless-python3.8
