@@ -2,7 +2,8 @@ ARG ruby=3.2
 
 FROM ruby:${ruby}
 
-ARG node=18
+ARG ruby
+ARG node=20
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -21,6 +22,10 @@ RUN apt-get update && \
     nodejs yarn libpq-dev postgresql-client && apt-get clean && \
     useradd -m -d /home/ci -U -u 1000 ci
 
+RUN (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem update --system 3.2.3 || gem update --system) && \
+    (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem install bundler -v 2.4.22 --no-document || gem install bundler --no-document)
+
 USER ci
 
-RUN gem install bundler --no-document
+RUN echo "gem: --no-document --user" > /home/ci/.gemrc && \
+    (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem install bundler -v 2.4.22 || gem install bundler)
