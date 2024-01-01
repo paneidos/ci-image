@@ -28,5 +28,5 @@ RUN curl https://pyenv.run | bash && \
     pyenv rehash && \
     nodenv install "${node}.$(nodenv install --list | grep '^'${node}. | sed s/${node}.// | sort -n | tail -1)" && \
     nodenv global "$(nodenv versions --bare)" && \
-    npm install -g npm yarn && \
+    corepack enable && \
     nodenv rehash
