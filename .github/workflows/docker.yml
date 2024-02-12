@@ -16,6 +16,10 @@ jobs:
         include:
           - dockerfile: ./laravel/Dockerfile
             image: paneidos/ci-image
+            tag: laravel-php8.3
+            build-args: "php=8.3\nnode=20"
+          - dockerfile: ./laravel/Dockerfile
+            image: paneidos/ci-image
             tag: laravel-php8.2
             build-args: "php=8.2\nnode=18"
           - dockerfile: ./laravel/Dockerfile
@@ -50,6 +54,10 @@ jobs:
             image: paneidos/ci-image
             tag: rails-ruby3.2
             build-args: "ruby=3.2\nnode=18"
+          - dockerfile: ./rails/Dockerfile
+            image: paneidos/ci-image
+            tag: rails-ruby3.3
+            build-args: "ruby=3.3\nnode=20"
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
             tag: django-python3.8
