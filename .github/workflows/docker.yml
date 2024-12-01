@@ -98,6 +98,10 @@ jobs:
             image: paneidos/ci-image
             tag: serverless-python3.12
             build-args: "python=3.12\nnode=20"
+          - dockerfile: ./serverless/Dockerfile.al2023
+            image: paneidos/ci-image
+            tag: serverless-python3.13
+            build-args: "python=3.13\nnode=22"
     permissions:
       contents: read
       packages: write
