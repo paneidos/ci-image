@@ -25,7 +25,7 @@ RUN curl https://pyenv.run | bash && \
     pip install --upgrade pip && \
     pip install pre-commit && \
     pyenv rehash && \
-    nodenv install "${node}.$(nodenv install --list | grep '^'${node}. | sed s/${node}.// | sort -n | tail -1)" && \
+    nodenv install "${node}.$(nodenv install --list-all | grep '^'${node}. | sed s/${node}.// | sort -n | tail -1)" && \
     nodenv global "$(nodenv versions --bare)" && \
     corepack enable && \
     nodenv rehash
