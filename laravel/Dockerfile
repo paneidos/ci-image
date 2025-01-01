@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 ARG php=php8.2
 ARG node=18
