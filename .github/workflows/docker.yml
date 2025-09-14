@@ -60,6 +60,10 @@ jobs:
             build-args: "ruby=3.3\nnode=20"
           - dockerfile: ./django/Dockerfile
             image: paneidos/ci-image
+            tag: rails-ruby3.4
+            build-args: "ruby=3.4\nnode=24"
+          - dockerfile: ./django/Dockerfile
+            image: paneidos/ci-image
             tag: django-python3.8
             build-args: "python=3.8\nnode=18"
           - dockerfile: ./django/Dockerfile
