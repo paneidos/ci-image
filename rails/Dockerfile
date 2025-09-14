@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get -y --no-install-recommends install wget git apt-transport-https lsb-release ca-certificates && \
+    apt-get -y --no-install-recommends install wget curl git apt-transport-https lsb-release ca-certificates && \
     mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/apt/keyrings/yarn.gpg && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
@@ -18,12 +18,12 @@ RUN apt-get update && \
     echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     echo "deb [signed-by=/etc/apt/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends curl openssh-client \
+    apt-get install -y --no-install-recommends openssh-client \
     nodejs yarn libpq-dev postgresql-client && apt-get clean && \
     useradd -m -d /home/ci -U -u 1000 ci
 
-RUN (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem update --system 3.2.3 || gem update --system) && \
-    (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem install bundler -v 2.4.22 --no-document || gem install bundler --no-document)
+RUN (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem update --system 3.2.3 || (test "$ruby" = 3.0 && gem update --system 3.5.23 || (test "$ruby" = 3.1 && gem update --system 3.6.9 || gem update --system))) && \
+    (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem install bundler -v 2.4.22 --no-document || (test "$ruby" = 3.0 && gem install bundler -v 2.5.23 --no-document || (test "$ruby" = 3.1 && gem install bundler -v 2.6.9 --no-document || gem install bundler --no-document)))
 
 USER ci
 
