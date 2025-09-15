@@ -4,7 +4,9 @@ FROM python:${python}
 
 ARG node=18
 
-ENV DEBIAN_FRONTEND=noninteractive
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/bin/
+
+ENV DEBIAN_FRONTEND=noninteractive UV_PYTHON_DOWNLOADS=never
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \

@@ -3,6 +3,8 @@ FROM amazonlinux:2
 ARG python=3.9
 ARG node=16
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/bin/
+
 RUN yum -y update && \
     amazon-linux-extras enable postgresql14 && \
     yum -y install curl unzip gnupg2 nano git tar make jq \
@@ -15,9 +17,7 @@ RUN yum -y update && \
 
 USER ci
 
-ENV HOME=/home/ci
-
-ENV PATH=/home/ci/.nodenv/shims:/home/ci/.nodenv/bin:/home/ci/.pyenv/shims:/home/ci/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV UV_PYTHON_DOWNLOADS=never HOME=/home/ci PATH=/home/ci/.nodenv/shims:/home/ci/.nodenv/bin:/home/ci/.pyenv/shims:/home/ci/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN curl https://pyenv.run | bash && \
     curl -fsSL https://raw.githubusercontent.com/nodenv/nodenv-installer/master/bin/nodenv-installer | bash && \
