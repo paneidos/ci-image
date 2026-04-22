@@ -6,7 +6,7 @@ ARG node=20
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/bin/
 
 RUN yum -y update && \
-    yum -y --allowerasing install curl unzip gnupg2 nano git tar make jq \
+    yum -y --allowerasing install curl unzip gnupg2 nano git patch tar make jq \
     gcc gcc-c++ zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel tk-devel libffi-devel xz-devel \
     openssl openssl-devel yum-utils postgresql15 shadow-utils && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -i).zip" -o "awscliv2.zip" && \

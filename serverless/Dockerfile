@@ -7,7 +7,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/bin/
 
 RUN yum -y update && \
     amazon-linux-extras enable postgresql14 && \
-    yum -y install curl unzip gnupg2 nano git tar make jq \
+    yum -y install curl unzip gnupg2 nano git patch tar make jq \
     gcc gcc-c++ zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel tk-devel libffi-devel xz-devel \
     openssl11 openssl11-devel yum-utils postgresql shadow-utils && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -i).zip" -o "awscliv2.zip" && \
