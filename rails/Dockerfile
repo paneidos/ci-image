@@ -20,6 +20,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y --no-install-recommends openssh-client \
     nodejs yarn libpq-dev postgresql-client && apt-get clean && \
+    corepack enable && \
+    corepack prepare yarn@stable --activate && \
     useradd -m -d /home/ci -U -u 1000 ci
 
 RUN (test "$ruby" = 2.6 -o "$ruby" = 2.7 && gem update --system 3.2.3 || (test "$ruby" = 3.0 && gem update --system 3.5.23 || (test "$ruby" = 3.1 && gem update --system 3.6.9 || gem update --system))) && \

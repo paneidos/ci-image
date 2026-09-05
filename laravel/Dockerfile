@@ -24,9 +24,12 @@ RUN apt-get update && \
     ${php}-bcmath ${php}-cli ${php}-curl ${php}-gd ${php}-intl ${php}-mbstring \
     ${php}-mysql ${php}-soap ${php}-xml ${php}-xsl ${php}-zip ${php}-xdebug \
     ${php}-memcached && apt-get clean && \
+    corepack enable && \
+    corepack prepare yarn@stable --activate && \
     curl --silent --show-error https://getcomposer.org/installer | \
     php -- --install-dir=/usr/local/bin --filename=composer && \
-    useradd -m -d /home/ci -U -u 1000 ci
+    useradd -m -d /home/ci -U -u 1000 ci && \
+    apt-get clean
 
 USER ci
 
